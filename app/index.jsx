@@ -1,11 +1,11 @@
-import { View, Text, Pressable } from "react-native";
 import { router } from "expo-router";
+import { Pressable, Text, View } from "react-native";
 import global from "../Assets/StyleManager";
 
 function Registro() {
 
   function irAComprar(){
-    router.replace("./(tabs)/comprador"); 
+    router.replace("/comprador"); 
   }
 
   /*function irAVender(){

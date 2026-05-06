@@ -1,11 +1,16 @@
-import { View, Text, TextInput, ScrollView, Pressable } from "react-native";
-import global from "../../Assets/StyleManager";
+import { useRouter } from "expo-router";
+import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
 
-function abrirMercado(){
-  router.push("/mercadoDetalle.jsx");
-}
 
 function Comprador() {
+  const router = useRouter();
+
+  function abrirMercado(){
+    console.log("CLICK");
+    router.replace("/mercadoDetalle");
+  }
+
+
   return (
     <ScrollView style={{ backgroundColor: "#1c1c1c" }}>
 

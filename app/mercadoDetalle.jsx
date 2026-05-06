@@ -1,5 +1,5 @@
-import { View, Text, TextInput, ScrollView, Image, Pressable } from "react-native";
 import { router } from "expo-router";
+import { Image, Pressable, ScrollView, Text, TextInput, View } from "react-native";
 
 function MercadoDetalle() {
 
@@ -8,7 +8,7 @@ function MercadoDetalle() {
   }
 
   function irACanasta(){
-    router.push("/canasta.jsx");
+    router.replace("/canasta.jsx");
   }
 
   return (
@@ -129,3 +129,5 @@ function ProductoCard({ nombre, descripcion, precio, imagen }) {
   );
 }
 }
+
+export default MercadoDetal
