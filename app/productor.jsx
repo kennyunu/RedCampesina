@@ -6,6 +6,43 @@ import global, { Colors } from "../Assets/StyleManager";
 
 const API = "https://backredcampesina.onrender.com";
 
+const FOTOS_PRODUCTOS = {
+  "Aguacate":           require("../Assets/imagenes/productos/Aguacate.jpg"),
+  "Arroz":              require("../Assets/imagenes/productos/Arroz.jpg"),
+  "Arveja":             require("../Assets/imagenes/productos/Arveja.jpg"),
+  "Banano":             require("../Assets/imagenes/productos/Banano.png"),
+  "Brocoli":            require("../Assets/imagenes/productos/Brocoli.avif"),
+  "Café en grano":      require("../Assets/imagenes/productos/Café en grano.avif"),
+  "Cebolla cabezona":   require("../Assets/imagenes/productos/Cebolla cabezona.jpg"),
+  "Cebolla larga":      require("../Assets/imagenes/productos/Cebolla larga.webp"),
+  "Cilantro":           require("../Assets/imagenes/productos/Cilantro.jpg"),
+  "Espinaca":           require("../Assets/imagenes/productos/Espinaca.webp"),
+  "Fresa":              require("../Assets/imagenes/productos/Fresa.jpg"),
+  "Frijol rojo":        require("../Assets/imagenes/productos/Frijol rojo.webp"),
+  "Guanabana":          require("../Assets/imagenes/productos/Guanabana.jpg"),
+  "Habichuela":         require("../Assets/imagenes/productos/Habichuela.webp"),
+  "Lechuga crespa":     require("../Assets/imagenes/productos/Lechuga crespa.jpg"),
+  "Lulo":               require("../Assets/imagenes/productos/Lulo.jpg"),
+  "Mango":              require("../Assets/imagenes/productos/Mango.webp"),
+  "Manzana":            require("../Assets/imagenes/productos/Manzana.jpg"),
+  "Maíz":               require("../Assets/imagenes/productos/Maíz.jpg"),
+  "Melon":              require("../Assets/imagenes/productos/Melon.jpg"),
+  "Mora":               require("../Assets/imagenes/productos/Mora.jpg"),
+  "Naranja":            require("../Assets/imagenes/productos/Naranja.jpg"),
+  "Papas sabaneras":    require("../Assets/imagenes/productos/Papas sabaneras.avif"),
+  "Papaya":             require("../Assets/imagenes/productos/Papaya.webp"),
+  "Patilla":            require("../Assets/imagenes/productos/Patilla.jpg"),
+  "Pepino cohombro":    require("../Assets/imagenes/productos/Pepino cohombro.jpg"),
+  "Pimentón":           require("../Assets/imagenes/productos/Pimentón.webp"),
+  "Piña":               require("../Assets/imagenes/productos/Piña.webp"),
+  "Platano verde":      require("../Assets/imagenes/productos/Platano verde.webp"),
+  "Plátano (Maduro)":   require("../Assets/imagenes/productos/Plátano (Maduro).jpg"),
+  "Tomate chonto":      require("../Assets/imagenes/productos/Tomate chonto.jpg"),
+  "Yuca":               require("../Assets/imagenes/productos/Yuca.jpg"),
+  "Zanahoria":          require("../Assets/imagenes/productos/Zanahoria.webp"),
+  "Zuccini":            require("../Assets/imagenes/productos/Zuccini.webp"),
+};
+
 const FOTOS_CAMPESINOS = [
   require("../Assets/imagenes/proveedores/campesino1.webp"),
   require("../Assets/imagenes/proveedores/campesino2.webp"),
@@ -163,9 +200,12 @@ function ProductoMini({ producto }) {
   return (
     <View style={[global.tarjeta, { flexDirection: "row", gap: 12, alignItems: "center" }]}>
       <Image
-        source={{ uri: producto.imagenes?.[0] }}
+        source={
+          producto.imagenes?.[0]
+            ? { uri: producto.imagenes[0] }
+            : (FOTOS_PRODUCTOS[producto.nombre] ?? require("../Assets/imagenes/logos/placeholder.jpg"))
+        }
         style={{ width: 70, height: 70, borderRadius: 12 }}
-        defaultSource={require("../Assets/imagenes/logos/placeholder.jpg")}
       />
       <View style={{ flex: 1 }}>
         <Text style={{ fontWeight: "bold", fontSize: 15 }}>{producto.nombre}</Text>
