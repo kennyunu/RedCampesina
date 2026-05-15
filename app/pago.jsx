@@ -7,7 +7,7 @@ import { useCanasta } from "./context/CanastaContext";
 
 export default function Pago() {
   const { total = 0 } = useLocalSearchParams();
-  const { vaciarCanasta } = useCanasta();
+  const { items, vaciarCanasta } = useCanasta();
 
   const [metodo, setMetodo] = useState(null);
   const [paso, setPaso] = useState(1);
@@ -26,9 +26,10 @@ export default function Pago() {
       return;
     }
     setPaso(3);
+    const itemsGuardados = JSON.stringify(items);
     setTimeout(() => {
       vaciarCanasta();
-      router.replace("/compraExitosa");
+      router.replace({ pathname: "/compraExitosa", params: { total, items: itemsGuardados } });
     }, 2000);
   }
 

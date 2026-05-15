@@ -189,7 +189,7 @@ function ProductoCard({ producto, onReservar, onVerCampesino }) {
         ${producto.precio_por_unidad?.toLocaleString()}
       </Text>
 
-      <Pressable onPress={onReservar} style={[global.botonVerde, { flex: 0, alignSelf: "stretch" }]}>
+      <Pressable onPress={onReservar} style={[global.botonVerde, { flex: 0, width: "100%", paddingHorizontal: 20 }]}>
         <Text style={global.botonTexto}>🧺 Reservar</Text>
       </Pressable>
     </View>
