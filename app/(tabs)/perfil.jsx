@@ -1,106 +1,123 @@
-import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
+import { Image, ScrollView, Text, View } from "react-native";
+import global, { Colors } from "../../Assets/StyleManager";
+import Footer from "../../components/Footer";
 
-export default function PerfilScreen() {
+export default function Perfil() {
+  // Datos simulados del usuario — luego vendrán del backend de autenticación
+  const usuario = {
+    nombre: "Carlos H.",
+    avatar: null,
+  };
+
+  const comprasExitosas = [
+    {
+      producto: "Huevos de Campo",
+      imagen: null,
+      precioCU: 25000,
+      cantidad: 2,
+      total: 50000,
+      fecha: "09/02/2026",
+    },
+  ];
+
+  const pendientes = [
+    {
+      producto: "Papas Sabaneras",
+      imagen: null,
+      precioCU: 4200,
+      cantidad: "3Kg",
+      total: 12600,
+      fecha: "27/05/2026",
+    },
+  ];
+
+  const campesinosContactados = [
+    {
+      nombre: "Don Juan",
+      granja: "Finca La Esperanza",
+      avatar: "https://i.pravatar.cc/101",
+    },
+  ];
+
   return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scroll}>
-        
-        {/* HEADER */}
-        <View style={styles.header}>
-          <Text style={styles.headerTitle}>Red Campesina</Text>
-          <Feather name="shopping-bag" size={22} color="#1f6f2f" />
-        </View>
+    <View style={{ flex: 1, backgroundColor: Colors.fondoOscuro }}>
+      <ScrollView>
+        <View style={global.panelPrincipal}>
 
-        <Text style={styles.sectionTitle}>Cuenta</Text>
-
-        <View style={styles.avatarContainer}>
-          <Image
-            source={{ uri: "../Assets/imagenes/avatar.jpg" }}
-            style={styles.avatar}
-          />
-        </View>
-
-        <Text style={styles.saludo}>Hola, Carlos H.</Text>
-
-        <Text style={styles.sectionTitle}>Compras exitosas</Text>
-
-        <View style={styles.card}>
-          <View style={styles.row}>
-            <Image
-              source={{
-                uri: "",
-              }}
-              style={styles.productImage}
-            />
-            <View>
-              <Text style={styles.label}>Producto:</Text>
-              <Text>Huevos de Campo</Text>
-            </View>
+          {/* HEADER */}
+          <View style={global.header}>
+            <Text style={global.headerTitulo}>Red Campesina</Text>
+            <Feather name="shopping-basket" size={22} color={Colors.verdeOscuro} />
           </View>
 
-          <Text style={styles.smallText}>Precio c/u: $25.000</Text>
-          <Text style={styles.smallText}>Cantidad: 2</Text>
-          <Text style={styles.smallText}>Total: $50.000</Text>
-        </View>
+          <Text style={global.subtitulo}>Cuenta</Text>
 
-        <Text style={styles.sectionTitle}>Pendientes por recoger</Text>
-
-        <View style={styles.card}>
-          <View style={styles.row}>
-            <Image
-              source={{
-                uri: "",
-              }}
-              style={styles.productImage}
-            />
-            <View>
-              <Text style={styles.label}>Producto:</Text>
-              <Text>Papas Sabaneras</Text>
+          {/* AVATAR */}
+          <View style={{ alignItems: "center", marginBottom: 10 }}>
+            <View style={{
+              width: 80, height: 80, borderRadius: 40,
+              backgroundColor: Colors.fondoInput,
+              justifyContent: "center", alignItems: "center",
+            }}>
+              <Feather name="user" size={40} color={Colors.gris} />
             </View>
+            <Text style={{ fontWeight: "bold", fontSize: 18, marginTop: 8 }}>
+              Hola, {usuario.nombre}
+            </Text>
           </View>
 
-          <Text style={styles.smallText}>Precio c/u: $4.200</Text>
-          <Text style={styles.smallText}>Cantidad: 3kg</Text>
-          <Text style={styles.smallText}>Total: $12.600</Text>
-        </View>
+          {/* COMPRAS EXITOSAS */}
+          <Text style={global.subtitulo}>Compras exitosas</Text>
+          {comprasExitosas.map((c, i) => (
+            <HistorialCard key={i} item={c} etiqueta={`Recogido el ${c.fecha}`} />
+          ))}
 
-        {/* COMPRADORES */}
-        <Text style={styles.sectionTitle}>Compradores contactados</Text>
+          {/* PENDIENTES */}
+          <Text style={global.subtitulo}>Pendientes por recoger</Text>
+          {pendientes.map((p, i) => (
+            <HistorialCard key={i} item={p} etiqueta={`Para recoger el ${p.fecha}`} />
+          ))}
 
-        <View style={styles.card}>
-          <View style={styles.row}>
-            <Image
-              source={{ uri: "https://i.pravatar.cc/101" }}
-              style={styles.avatarSmall}
-            />
-            <View>
-              <Text style={styles.label}>Nombre:</Text>
-              <Text>Don Juan</Text>
-              <Text>Puntuación: 4.5/5</Text>
-              <Text>Ordenes realizadas: +300</Text>
-              <Text>Años activos: 30 años</Text>
+          {/* CAMPESINOS CONTACTADOS */}
+          <Text style={global.subtitulo}>Compradores contactados</Text>
+          {campesinosContactados.map((c, i) => (
+            <View key={i} style={[global.tarjeta, { flexDirection: "row", alignItems: "center", gap: 12 }]}>
+              <Image
+                source={{ uri: c.avatar }}
+                style={{ width: 55, height: 55, borderRadius: 28 }}
+              />
+              <View>
+                <Text style={{ fontWeight: "bold", fontSize: 15 }}>{c.nombre}</Text>
+                <Text style={global.textoGris}>{c.granja}</Text>
+              </View>
             </View>
-          </View>
+          ))}
+
+          <View style={{ height: 20 }} />
         </View>
-
-        {/* ESPACIO PARA TAB */}
-        <View style={{ height: 80 }} />
-
       </ScrollView>
+      <Footer />
+    </View>
+  );
+}
 
-      {/* BOTTOM TAB (solo visual) */}
-      <View style={styles.tabBar}>
-        <View style={styles.tabItem}>
-          <Feather name="shopping-bag" size={20} color="#555" />
-          <Text style={styles.tabText}>Mercados</Text>
+function HistorialCard({ item, etiqueta }) {
+  return (
+    <View style={global.tarjeta}>
+      <View style={{ flexDirection: "row", alignItems: "center", gap: 12, marginBottom: 8 }}>
+        <View style={{ width: 55, height: 55, borderRadius: 10, backgroundColor: Colors.fondoInput, justifyContent: "center", alignItems: "center" }}>
+          <Feather name="package" size={24} color={Colors.gris} />
         </View>
-
-        <View style={styles.tabActive}>
-          <Feather name="user" size={20} color="#fff" />
-          <Text style={styles.tabTextActive}>Perfil</Text>
+        <View>
+          <Text style={global.textoGris}>Producto:</Text>
+          <Text style={{ fontWeight: "bold" }}>{item.producto}</Text>
         </View>
       </View>
+      <Text style={global.textoGris}>Precio c/u: ${item.precioCU.toLocaleString()}</Text>
+      <Text style={global.textoGris}>Cantidad: {item.cantidad}</Text>
+      <Text style={{ fontWeight: "bold", marginTop: 2 }}>Total: ${item.total.toLocaleString()}</Text>
+      <Text style={[global.textoGris, { marginTop: 4, fontStyle: "italic" }]}>{etiqueta}</Text>
     </View>
   );
 }

@@ -1,178 +1,201 @@
 import { StyleSheet } from "react-native";
 
-const colors = {
+// ─── COLORES ───────────────────────────────────────────────
+export const Colors = {
   fondoOscuro: "#1c1c1c",
-  fondoClaro: "#e8e4cf",
-  card: "#e2ddc7",
-  cardSecundaria: "#dcd8c0",
-  verde: "#2e7d32",
-  verdeClaro: "#4caf50",
-  verdeSuave: "#cfe8b4",
-  verdeSeleccion: "#dfe8c7",
-  cafe: "#a67c52",
+  fondoCrudo: "#e8e4cf",
+  fondoTarjeta: "#e2ddc7",
+  fondoInput: "#dcd8c0",
+  verdeOscuro: "#2e7d32",
+  verdeMedio: "#4caf50",
+  verdeClaro: "#cfe8b4",
+  verdePastel: "#dfe8c7",
+  cafeClaro: "#e8dcc7",
+  cafeMedio: "#a67c52",
+  gris: "#666",
   blanco: "#fff",
-  negro: "#000",
-  gris: "#666"
+  rojo: "#e53935",
 };
 
+// ─── ESTILOS GLOBALES ──────────────────────────────────────
 const global = StyleSheet.create({
 
-  container: {
+  // Contenedores
+  container: { flex: 1 },
+  scroll: { backgroundColor: Colors.fondoOscuro },
+  panelPrincipal: {
+    backgroundColor: Colors.fondoCrudo,
     flex: 1,
-    backgroundColor: colors.fondoOscuro
-  },
-
-  content: {
-    backgroundColor: colors.fondoClaro,
     padding: 15,
     borderRadius: 20,
-    flex: 1
   },
 
-  center: {
-    justifyContent: "center",
-    alignItems: "center"
+  // ─── HEADER ───────────────────────────────────────────────
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 15,
   },
-
-  title: {
-    fontSize: 22,
-    fontWeight: "bold"
-  },
-
-  subtitle: {
-    fontSize: 20,
+  headerTitulo: {
+    color: Colors.verdeOscuro,
     fontWeight: "bold",
-    marginVertical: 15
+    fontSize: 16,
+  },
+  headerVolverTexto: {
+    color: Colors.verdeOscuro,
+    fontWeight: "bold",
+    fontSize: 15,
   },
 
-  textCenter: {
-    textAlign: "center"
+  // ─── TIPOGRAFÍA ───────────────────────────────────────────
+  tituloPagina: {
+    fontSize: 22,
+    fontWeight: "bold",
+    marginBottom: 10,
   },
-
-  textBold: {
-    fontWeight: "bold"
+  subtitulo: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: Colors.verdeOscuro,
+    marginVertical: 15,
   },
+  textoGris: { color: Colors.gris, fontSize: 13 },
+  textoVerde: { color: Colors.verdeOscuro, fontWeight: "bold" },
+  textoCafe: { color: Colors.cafeMedio },
 
-  textGreen: {
-    color: colors.verde,
-    fontWeight: "bold"
-  },
-
-  textWhite: {
-    color: colors.blanco
-  },
-
-  textGray: {
-    color: colors.gris
-  },
-
-  input: {
-    backgroundColor: colors.cardSecundaria,
+  // ─── INPUT / BUSCADOR ─────────────────────────────────────
+  inputBuscador: {
+    backgroundColor: Colors.fondoInput,
     borderRadius: 20,
     padding: 10,
-    marginVertical: 15
+    marginVertical: 15,
+    paddingLeft: 15,
   },
 
-  card: {
-    backgroundColor: colors.card,
-    padding: 15,
-    borderRadius: 20,
-    marginBottom: 15
-  },
-
-  cardSmall: {
-    backgroundColor: colors.card,
+  // ─── TARJETAS ─────────────────────────────────────────────
+  tarjeta: {
+    backgroundColor: Colors.fondoTarjeta,
     padding: 15,
     borderRadius: 15,
-    marginBottom: 15
+    marginBottom: 15,
   },
-
-  cardHighlight: {
-    backgroundColor: colors.cardSecundaria,
+  tarjetaResumen: {
+    backgroundColor: Colors.fondoInput,
     padding: 15,
     borderRadius: 15,
-    marginVertical: 15
+    marginTop: 20,
   },
 
-  button: {
+  // ─── ETIQUETAS ────────────────────────────────────────────
+  etiqueta: {
+    backgroundColor: Colors.verdeClaro,
+    paddingHorizontal: 10,
+    paddingVertical: 2,
+    borderRadius: 10,
+    alignSelf: "flex-start",
+    fontSize: 12,
+    marginRight: 5,
+    marginBottom: 6,
+  },
+  etiquetasRow: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginBottom: 6,
+  },
+
+  // ─── BOTONES ──────────────────────────────────────────────
+  botonVerde: {
+    backgroundColor: Colors.verdeOscuro,
     padding: 12,
     borderRadius: 25,
-    alignItems: "center"
+    alignItems: "center",
+    flex: 1,
   },
-
-  buttonGreen: {
-    backgroundColor: colors.verde
+  botonVerdeMedio: {
+    backgroundColor: Colors.verdeMedio,
+    padding: 12,
+    borderRadius: 25,
+    alignItems: "center",
+    flex: 1,
   },
-
-  buttonLightGreen: {
-    backgroundColor: colors.verdeClaro
+  botonTexto: {
+    color: Colors.blanco,
+    fontWeight: "bold",
+    textAlign: "center",
   },
-
-  buttonSoft: {
-    backgroundColor: colors.verdeSeleccion
-  },
-
-  buttonRow: {
+  botonesRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 20
+    gap: 10,
+    marginTop: 20,
   },
 
-  flex1: {
-    flex: 1
-  },
-
-  marginRight: {
-    marginRight: 5
-  },
-
-  marginLeft: {
-    marginLeft: 5
-  },
-
-  tag: {
-    paddingHorizontal: 10,
-    borderRadius: 10,
-    alignSelf: "flex-start"
-  },
-
-  tagGreen: {
-    backgroundColor: colors.verdeSuave
-  },
-
-  row: {
-    flexDirection: "row",
-    alignItems: "center"
-  },
-
-  spaceBetween: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center"
-  },
-
-  imageFull: {
+  // ─── IMÁGENES ─────────────────────────────────────────────
+  imagenProducto: {
     width: "100%",
-    borderRadius: 15
+    height: 150,
+    borderRadius: 15,
+    marginBottom: 10,
   },
-
-  imageSmall: {
+  imagenProductoChica: {
     width: 50,
     height: 50,
-    borderRadius: 10
+    borderRadius: 10,
   },
 
-  successCircle: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    borderWidth: 8,
-    borderColor: colors.verde,
-    justifyContent: "center",
+  // ─── FOOTER ───────────────────────────────────────────────
+  footer: {
+    flexDirection: "row",
+    backgroundColor: Colors.fondoCrudo,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    justifyContent: "space-around",
     alignItems: "center",
-    marginBottom: 15
-  }
+    borderTopWidth: 1,
+    borderTopColor: Colors.fondoInput,
+  },
+  footerItem: {
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 8,
+    borderRadius: 25,
+  },
+  footerItemActivo: {
+    backgroundColor: Colors.verdeMedio,
+    paddingHorizontal: 20,
+    paddingVertical: 8,
+    borderRadius: 25,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+  },
+  footerTexto: { fontSize: 11, color: Colors.gris, marginTop: 2 },
+  footerTextoActivo: {
+    fontSize: 13,
+    color: Colors.verdeOscuro,
+    fontWeight: "bold",
+    marginLeft: 4,
+  },
 
+  // ─── PAGO ─────────────────────────────────────────────────
+  opcionPagoInactiva: {
+    backgroundColor: Colors.fondoTarjeta,
+    padding: 15,
+    borderRadius: 20,
+    marginTop: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  opcionPagoActiva: {
+    backgroundColor: Colors.verdeOscuro,
+    padding: 15,
+    borderRadius: 20,
+    marginTop: 10,
+  },
+  opcionPagoTextoActivo: { color: Colors.blanco, fontWeight: "bold" },
+  opcionPagoTextoInactivo: { fontWeight: "bold", color: "#333" },
 });
 
 export default global;

@@ -1,115 +1,105 @@
-import { useRouter } from "expo-router";
-import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import Feather from "@expo/vector-icons/Feather";
+import { router } from "expo-router";
+import { useEffect, useState } from "react";
+import { Image, Linking, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import global, { Colors } from "../Assets/StyleManager";
+import Footer from "../components/Footer";
 
+const API = "http://10.0.2.2:5000"; // en dispositivo físico: tu IP local ej. http://192.168.1.X:5000
 
-function Comprador() {
-  const router = useRouter();
+const DIAS_ORDEN = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábados","Domingos"];
 
-  function abrirMercado(){
-    console.log("CLICK");
-    router.replace("/mercadoDetalle");
-  }
+export default function Comprador() {
+  const [mercados, setMercados] = useState([]);
+  const [busqueda, setBusqueda] = useState("");
 
+  useEffect(() => {
+    fetch(`${API}/api/v1/mercados`)
+      .then((r) => r.json())
+      .then((data) => setMercados(data.data || []))
+      .catch((e) => console.log("Error cargando mercados:", e));
+  }, []);
+
+  const mercadosFiltrados = mercados.filter((m) => {
+    const q = busqueda.toLowerCase();
+    if (!q) return true;
+    return (
+      m.nombre.toLowerCase().includes(q) ||
+      m.dias?.some((d) => d.toLowerCase().includes(q))
+    );
+  });
 
   return (
-    <ScrollView style={{ backgroundColor: "#1c1c1c" }}>
+    <View style={{ flex: 1, backgroundColor: Colors.fondoOscuro }}>
+      <ScrollView>
+        <View style={global.panelPrincipal}>
 
-      <View style={{
-        backgroundColor: "#e8e4cf",
-        flex: 1,
-        padding: 15,
-        borderRadius: 20
-      }}>
+          {/* HEADER */}
+          <View style={global.header}>
+            <Text style={global.headerTitulo}>Red Campesina</Text>
+            <Feather name="shopping-basket" size={22} color={Colors.verdeOscuro} />
+          </View>
 
-        <View style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center"
-        }}>
-          <Text style={{ color: "#2e7d32", fontWeight: "bold" }}>
-            Red Campesina
-          </Text>
-          <Text>🛒</Text>
-        </View>
-
-        <TextInput
-          placeholder="Encuentra mercados o productos"
-          style={{
-            backgroundColor: "#dcd8c0",
-            borderRadius: 20,
-            padding: 10,
-            marginVertical: 15
-          }}
-        />
-
-        <View style={{
-          height: 200,
-          backgroundColor: "#cfcfcf",
-          borderRadius: 15,
-          justifyContent: "center",
-          alignItems: "center"
-        }}>
-          <Text>Mapa aquí</Text>
-
-          <Pressable style={{
-            position: "absolute",
-            bottom: 10,
-            backgroundColor: "#2e7d32",
-            padding: 10,
-            borderRadius: 20
+          {/* BUSCADOR */}
+          <View style={{
+            flexDirection: "row", alignItems: "center",
+            backgroundColor: Colors.fondoInput, borderRadius: 20,
+            paddingHorizontal: 12, marginBottom: 15,
           }}>
-            <Text style={{ color: "#fff" }}>Explorar Más</Text>
+            <Feather name="search" size={16} color={Colors.gris} />
+            <TextInput
+              placeholder="Buscar por nombre o día"
+              value={busqueda}
+              onChangeText={setBusqueda}
+              style={{ flex: 1, padding: 10 }}
+            />
+          </View>
+
+          {/* MAPA */}
+          <Pressable
+            onPress={() => Linking.openURL("https://maps.google.com")}
+            style={{ height: 180, borderRadius: 15, overflow: "hidden", marginBottom: 20 }}
+          >
+            <Image
+              source={require("../Assets/imagenes/logos/mapa_preview.png")}
+              style={{ width: "100%", height: "100%" }}
+              resizeMode="cover"
+            />
+            <View style={{
+              position: "absolute", bottom: 10, alignSelf: "center",
+              backgroundColor: Colors.verdeOscuro, paddingHorizontal: 20,
+              paddingVertical: 8, borderRadius: 20,
+            }}>
+              <Text style={{ color: Colors.blanco, fontWeight: "bold" }}>
+                Explorar en Maps
+              </Text>
+            </View>
           </Pressable>
+
+          {/* TÍTULO */}
+          <Text style={global.tituloPagina}>Próximos Mercados</Text>
+
+          {/* TARJETAS */}
+          {mercadosFiltrados
+            .sort((a, b) => DIAS_ORDEN.indexOf(a.dias?.[0]) - DIAS_ORDEN.indexOf(b.dias?.[0]))
+            .map((m) => (
+              <Pressable
+                key={m._id}
+                onPress={() => router.push({ pathname: "/mercadoDetalle", params: { mercadoId: m._id, mercadoNombre: m.nombre } })}
+                style={global.tarjeta}
+              >
+                <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start" }}>
+                  <Text style={{ fontWeight: "bold", fontSize: 16, flex: 1 }}>{m.nombre}</Text>
+                  <Text style={global.etiqueta}>{m.dias?.[0]}</Text>
+                </View>
+                <Text style={[global.textoGris, { marginTop: 4 }]}>📍 {m.direccion}</Text>
+                <Text style={[global.textoGris, { marginTop: 3 }]}>⏰ {m.horario?.inicio} - {m.horario?.fin}</Text>
+              </Pressable>
+            ))}
+
         </View>
-
-        <Text style={{
-          fontSize: 20,
-          fontWeight: "bold",
-          marginVertical: 15
-        }}>
-          Próximos Mercados
-        </Text>
-
-        <Pressable onPress={abrirMercado} style={cardStyle}>
-                <Text style={tagGreen}>Orgánicos</Text>
-                <Text style={title}>Mercado de la Concordia</Text>
-                <Text>Mañana</Text>
-                <Text>📍 Parque central</Text>
-                <Text>⏰ 7:00AM - 4:00PM</Text>
-        </Pressable>
-        
-
-        <View style={cardStyle}>
-          <Text style={tagGreen}>Frescos</Text>
-          <Text style={title}>Mercado Salitre</Text>
-          <Text>Sábado</Text>
-          <Text>📍 Calle primera</Text>
-          <Text>⏰ 7:00AM - 4:00PM</Text>
-        </View>
-
-      </View>
-    </ScrollView>
+      </ScrollView>
+      <Footer />
+    </View>
   );
 }
-
-const cardStyle = {
-  backgroundColor: "#e2ddc7",
-  padding: 15,
-  borderRadius: 15,
-  marginBottom: 15
-};
-
-const tagGreen = {
-  backgroundColor: "#cfe8b4",
-  paddingHorizontal: 10,
-  borderRadius: 10,
-  alignSelf: "flex-start"
-};
-
-const title = {
-  fontWeight: "bold",
-  fontSize: 16,
-  marginVertical: 5
-};
-
-export default Comprador;
