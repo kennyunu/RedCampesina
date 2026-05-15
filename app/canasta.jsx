@@ -2,8 +2,8 @@ import Feather from "@expo/vector-icons/Feather";
 import { router } from "expo-router";
 import { Image, Pressable, ScrollView, Text, View } from "react-native";
 import global, { Colors } from "../Assets/StyleManager";
-import Footer from "../components/Footer";
-import { useCanasta } from "../context/CanastaContext";
+import Footer from "./components/Footer";
+import { useCanasta } from "./context/CanastaContext";
 
 export default function Canasta() {
   const { items, aumentar, disminuir, eliminar, total } = useCanasta();

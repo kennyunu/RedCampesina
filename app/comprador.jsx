@@ -3,7 +3,7 @@ import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { Image, Linking, Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import global, { Colors } from "../Assets/StyleManager";
-import Footer from "../components/Footer";
+import Footer from "./components/Footer";
 
 const API = "http://10.0.2.2:5000"; // en dispositivo físico: tu IP local ej. http://192.168.1.X:5000
 

@@ -1,7 +1,7 @@
 import Feather from "@expo/vector-icons/Feather";
-import { usePathname, router } from "expo-router";
+import { router, usePathname } from "expo-router";
 import { Pressable, Text, View } from "react-native";
-import global, { Colors } from "../Assets/StyleManager";
+import global, { Colors } from "../../Assets/StyleManager";
 
 export default function Footer() {
   const pathname = usePathname();

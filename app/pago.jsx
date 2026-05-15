@@ -3,7 +3,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import { useState } from "react";
 import { Image, Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import global, { Colors } from "../Assets/StyleManager";
-import { useCanasta } from "../context/CanastaContext";
+import { useCanasta } from "./context/CanastaContext";
 
 export default function Pago() {
   const { total = 0 } = useLocalSearchParams();

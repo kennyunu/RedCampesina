@@ -1,7 +1,7 @@
 import Feather from "@expo/vector-icons/Feather";
 import { Image, ScrollView, Text, View } from "react-native";
 import global, { Colors } from "../../Assets/StyleManager";
-import Footer from "../../components/Footer";
+import Footer from "../components/Footer";
 
 export default function Perfil() {
   // Datos simulados del usuario — luego vendrán del backend de autenticación

@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { CanastaProvider } from "../context/CanastaContext";
+import { CanastaProvider } from "./context/CanastaContext";
 
 export default function RootLayout() {
   return (
