@@ -97,7 +97,7 @@ export default function Pago() {
               </View>
               <Text style={{ color: Colors.blanco, marginBottom: 10 }}>Escanea el código QR:</Text>
               <Image
-                source={require("../Assets/imagenes/logos/qr_nequi.png")}
+                source={require("../Assets/imagenes/logos/qr-code.png")}
                 style={{ width: 160, height: 160, alignSelf: "center", borderRadius: 10 }}
                 resizeMode="contain"
               />

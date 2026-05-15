@@ -1,11 +1,11 @@
 import Feather from "@expo/vector-icons/Feather";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
-import { Image, Linking, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { Image, Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import global, { Colors } from "../Assets/StyleManager";
 import Footer from "./components/Footer";
 
-const API = "http://10.0.2.2:5000"; // en dispositivo físico: tu IP local ej. http://192.168.1.X:5000
+const API = "http://localhost:5000";
 
 const DIAS_ORDEN = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábados","Domingos"];
 
@@ -37,7 +37,13 @@ export default function Comprador() {
           {/* HEADER */}
           <View style={global.header}>
             <Text style={global.headerTitulo}>Red Campesina</Text>
-            <Feather name="shopping-basket" size={22} color={Colors.verdeOscuro} />
+            <Pressable onPress={() => router.push("/canasta")}>
+              <Image
+                source={require("../Assets/imagenes/logos/canasta.png")}
+                style={{ width: 28, height: 28 }}
+                resizeMode="contain"
+              />
+            </Pressable>
           </View>
 
           {/* BUSCADOR */}
@@ -54,27 +60,6 @@ export default function Comprador() {
               style={{ flex: 1, padding: 10 }}
             />
           </View>
-
-          {/* MAPA */}
-          <Pressable
-            onPress={() => Linking.openURL("https://maps.google.com")}
-            style={{ height: 180, borderRadius: 15, overflow: "hidden", marginBottom: 20 }}
-          >
-            <Image
-              source={require("../Assets/imagenes/logos/mapa_preview.png")}
-              style={{ width: "100%", height: "100%" }}
-              resizeMode="cover"
-            />
-            <View style={{
-              position: "absolute", bottom: 10, alignSelf: "center",
-              backgroundColor: Colors.verdeOscuro, paddingHorizontal: 20,
-              paddingVertical: 8, borderRadius: 20,
-            }}>
-              <Text style={{ color: Colors.blanco, fontWeight: "bold" }}>
-                Explorar en Maps
-              </Text>
-            </View>
-          </Pressable>
 
           {/* TÍTULO */}
           <Text style={global.tituloPagina}>Próximos Mercados</Text>

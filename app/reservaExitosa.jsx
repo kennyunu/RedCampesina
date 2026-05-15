@@ -6,7 +6,7 @@ function ReservaExitosa() {
   const { usuario = "Usuario", codigo = "A0000" } = useLocalSearchParams();
 
   function volver(){
-    router.replace("/comprador.jsx"); 
+    router.replace("/comprador");
   }
 
   return (

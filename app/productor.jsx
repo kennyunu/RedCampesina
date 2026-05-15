@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Image, Pressable, ScrollView, Text, View } from "react-native";
 import global, { Colors } from "../Assets/StyleManager";
 
-const API = "http://10.0.2.2:5000";
+const API = "http://localhost:5000";
 
 const DESCRIPCIONES = [
   "Es un emprendimiento campesino dedicado a la producción y venta de productos frescos, orgánicos y de alta calidad, cultivados directamente en su finca.",
@@ -86,7 +86,11 @@ export default function Productor() {
 
           {/* IMAGEN */}
           <Image
-            source={require("../Assets/imagenes/proveedores/placeholder_productor.png")}
+            source={
+              campesino.foto
+                ? { uri: campesino.foto }
+                : require("../Assets/imagenes/logos/placeholder.jpg")
+            }
             style={{ width: "100%", height: 220, borderRadius: 20, marginBottom: 15 }}
             resizeMode="cover"
           />
@@ -140,7 +144,7 @@ function ProductoMini({ producto }) {
       <Image
         source={{ uri: producto.imagenes?.[0] }}
         style={{ width: 70, height: 70, borderRadius: 12 }}
-        defaultSource={require("../Assets/imagenes/logos/placeholder.png")}
+        defaultSource={require("../Assets/imagenes/logos/placeholder.jpg")}
       />
       <View style={{ flex: 1 }}>
         <Text style={{ fontWeight: "bold", fontSize: 15 }}>{producto.nombre}</Text>

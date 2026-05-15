@@ -90,7 +90,7 @@ function ItemCanasta({ item, onAumentar, onDisminuir, onEliminar }) {
       <Image
         source={{ uri: item.imagen }}
         style={global.imagenProducto}
-        defaultSource={require("../Assets/imagenes/logos/placeholder.png")}
+        defaultSource={require("../Assets/imagenes/logos/canasta.png")}
       />
 
       {/* Etiquetas del backend */}

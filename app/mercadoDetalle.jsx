@@ -5,7 +5,7 @@ import { Image, Pressable, ScrollView, Text, TextInput, View } from "react-nativ
 import global, { Colors } from "../Assets/StyleManager";
 import { useCanasta } from "./context/CanastaContext";
 
-const API = "http://10.0.2.2:5000";
+const API = "http://localhost:5000";
 
 export default function MercadoDetalle() {
   const { mercadoId, mercadoNombre } = useLocalSearchParams();
@@ -56,7 +56,11 @@ export default function MercadoDetalle() {
 
             {/* Canasta con badge */}
             <Pressable onPress={() => router.push("/canasta")} style={{ position: "relative" }}>
-              <Feather name="shopping-basket" size={24} color={Colors.verdeOscuro} />
+              <Image
+                source={require("../Assets/imagenes/logos/canasta.png")}
+                style={{ width: 28, height: 28 }}
+                resizeMode="contain"
+              />
               {cantidadCanasta > 0 && (
                 <View style={{
                   position: "absolute", top: -6, right: -6,
@@ -119,7 +123,7 @@ function ProductoCard({ producto, onReservar, onVerCampesino }) {
       <Image
         source={{ uri: producto.imagenes?.[0] }}
         style={global.imagenProducto}
-        defaultSource={require("../Assets/imagenes/logos/placeholder.png")}
+        defaultSource={require("../Assets/imagenes/logos/placeholder.jpg")}
       />
 
       {/* Etiquetas */}

@@ -20,7 +20,7 @@ function CompraExitosa() {
   ];
 
   function volver(){
-    router.replace("/(tabs)/comprador");
+    router.replace("/comprador");
   }
 
   return (
