@@ -5,7 +5,7 @@ import { Image, Pressable, ScrollView, Text, TextInput, View } from "react-nativ
 import global, { Colors } from "../Assets/StyleManager";
 import { useCanasta } from "./context/CanastaContext";
 
-const API = "http://localhost:5000";
+const API = "https://backredcampesina.onrender.com";
 
 export default function MercadoDetalle() {
   const { mercadoId, mercadoNombre } = useLocalSearchParams();

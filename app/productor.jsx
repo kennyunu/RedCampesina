@@ -4,7 +4,30 @@ import { useEffect, useMemo, useState } from "react";
 import { Image, Pressable, ScrollView, Text, View } from "react-native";
 import global, { Colors } from "../Assets/StyleManager";
 
-const API = "http://localhost:5000";
+const API = "https://backredcampesina.onrender.com";
+
+const FOTOS_CAMPESINOS = [
+  require("../Assets/imagenes/proveedores/campesino1.webp"),
+  require("../Assets/imagenes/proveedores/campesino2.webp"),
+  require("../Assets/imagenes/proveedores/campesino3.webp"),
+  require("../Assets/imagenes/proveedores/campesino4.jpg"),
+  require("../Assets/imagenes/proveedores/campesino5.jpg"),
+  require("../Assets/imagenes/proveedores/campesino6.avif"),
+  require("../Assets/imagenes/proveedores/campesino7.jpg"),
+  require("../Assets/imagenes/proveedores/campesino8.avif"),
+  require("../Assets/imagenes/proveedores/campesino9.avif"),
+  require("../Assets/imagenes/proveedores/campesino10.avif"),
+  require("../Assets/imagenes/proveedores/campesino11.jpg"),
+  require("../Assets/imagenes/proveedores/campesino12.avif"),
+  require("../Assets/imagenes/proveedores/campesino13.webp"),
+  require("../Assets/imagenes/proveedores/campesino14.jpg"),
+  require("../Assets/imagenes/proveedores/campesino15.avif"),
+  require("../Assets/imagenes/proveedores/campesino16.jpg"),
+  require("../Assets/imagenes/proveedores/campesino17.avif"),
+  require("../Assets/imagenes/proveedores/campesino18.avif"),
+  require("../Assets/imagenes/proveedores/campesino19.jpg"),
+  require("../Assets/imagenes/proveedores/campesino20.jpg"),
+];
 
 const DESCRIPCIONES = [
   "Es un emprendimiento campesino dedicado a la producción y venta de productos frescos, orgánicos y de alta calidad, cultivados directamente en su finca.",
@@ -68,6 +91,10 @@ export default function Productor() {
 
   const { nombre, granja, productos } = campesino.productor;
 
+  const hashId = campesino.id.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0);
+  const descripcion = DESCRIPCIONES[hashId % DESCRIPCIONES.length];
+  const fotoCampesino = FOTOS_CAMPESINOS[hashId % FOTOS_CAMPESINOS.length];
+
   return (
     <View style={{ flex: 1, backgroundColor: Colors.fondoOscuro }}>
       <ScrollView>
@@ -86,11 +113,7 @@ export default function Productor() {
 
           {/* IMAGEN */}
           <Image
-            source={
-              campesino.foto
-                ? { uri: campesino.foto }
-                : require("../Assets/imagenes/logos/placeholder.jpg")
-            }
+            source={fotoCampesino}
             style={{ width: "100%", height: 220, borderRadius: 20, marginBottom: 15 }}
             resizeMode="cover"
           />
@@ -98,11 +121,9 @@ export default function Productor() {
           {/* INFO GENERAL */}
           <Text style={global.subtitulo}>Información general</Text>
 
-          {DESCRIPCIONES.map((desc, i) => (
-            <Text key={i} style={[global.textoGris, { marginBottom: 8, lineHeight: 20 }]}>
-              {desc}
-            </Text>
-          ))}
+          <Text style={[global.textoGris, { marginBottom: 8, lineHeight: 20 }]}>
+            {descripcion}
+          </Text>
 
           {/* PRODUCTOS PRINCIPALES */}
           <Text style={global.subtitulo}>Productos principales en venta</Text>

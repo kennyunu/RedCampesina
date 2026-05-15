@@ -5,7 +5,7 @@ import { Image, Pressable, ScrollView, Text, TextInput, View } from "react-nativ
 import global, { Colors } from "../Assets/StyleManager";
 import Footer from "./components/Footer";
 
-const API = "http://localhost:5000";
+const API = "https://backredcampesina.onrender.com";
 
 const DIAS_ORDEN = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábados","Domingos"];
 
